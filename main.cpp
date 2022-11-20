@@ -138,7 +138,7 @@ int main(int argc, char **argv) {
     // Take first frame and find corners in it
     capture >> old_frame;
     cvtColor(old_frame, old_gray, COLOR_BGR2GRAY);
-    goodFeaturesToTrack(old_gray(box), oldFeatures, 100, 0.3, 7, Mat(), 7, false, 0.04);
+    goodFeaturesToTrack(old_gray(box), oldFeatures, 50, 0.3, 7, Mat(), 7, false, 0.04);
     // Create a mask image for drawing purposes
     Mat mask = Mat::zeros(old_frame.size(), old_frame.type());
     while (true) {
@@ -167,6 +167,9 @@ int main(int argc, char **argv) {
         // Now update the previous frame and previous points
         old_gray = frame_gray.clone();
         oldFeatures = good_new;
+        if (oldFeatures.size() < 5){
+            goodFeaturesToTrack(frame_gray(box), oldFeatures, 50, 0.3, 7, Mat(), 7, false, 0.04);
+        }
         cout << good_new.size() << endl;
         for (auto p: good_new) {
             cout << p << " ";
