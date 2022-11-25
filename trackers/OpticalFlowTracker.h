@@ -19,9 +19,8 @@ class OpticalFlowTracker : public Tracker {
 
 public:
     OpticalFlowTracker();
-    void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian);
-    cv::Rect2d getNextPedestrianPosition();
-
+    void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian) override;
+    cv::Rect2d getNextPedestrianPosition() override;
 };
 
 

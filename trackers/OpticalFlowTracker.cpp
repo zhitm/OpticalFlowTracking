@@ -37,6 +37,7 @@ void OpticalFlowTracker::updateBoxPosition() {
     pedestrianBox.x += boxMotion.x;
     pedestrianBox.y += boxMotion.y;
 }
+
 void OpticalFlowTracker::startTracking(VideoCapture cap, Rect2d pedestrian) {
     this->capture = cap;
     this->pedestrianBox = pedestrian;
@@ -52,7 +53,8 @@ Rect2d OpticalFlowTracker::getNextPedestrianPosition() {
     std::vector<uchar> status;
     std::vector<float> err;
     TermCriteria criteria = TermCriteria((TermCriteria::COUNT) + (TermCriteria::EPS), 10, 0.03);
-    calcOpticalFlowPyrLK(oldGray(pedestrianBox), newGray(pedestrianBox), oldFeatures, newFeatures, status, err, Size(15, 15), 2,
+    calcOpticalFlowPyrLK(oldGray(pedestrianBox), newGray(pedestrianBox), oldFeatures, newFeatures, status, err,
+                         Size(15, 15), 2,
                          criteria);
     std::vector<Point2f> good_new = selectGoodFeatures(status, newFrame);
     updateBoxPosition();
@@ -66,10 +68,9 @@ Rect2d OpticalFlowTracker::getNextPedestrianPosition() {
 }
 
 std::vector<Point2f> OpticalFlowTracker::selectGoodFeatures(std::vector<uchar> &status,
-                                                                         Mat &frame) {
+                                                            Mat &frame) {
     std::vector<Point2f> good_new;
     for (uint i = 0; i < oldFeatures.size(); i++) {
-// Select good points
         if (status[i] == 1) {
             good_new.push_back(newFeatures[i]);
         }

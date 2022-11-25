@@ -1,19 +1,20 @@
-//
-// Created by maria on 23.11.22.
-//
-
 #include "MyTracker.h"
-#include "OpticalFlowTracker.h"
+#include "trackers/OpticalFlowTracker.h"
+#include "trackers/KCFTracker.h"
 
 MyTracker::MyTracker() {
-    Tracker t = OpticalFlowTracker();
-    trackers.push_back(t);
+    Tracker *opticalFlowTracker = new OpticalFlowTracker();
+    Tracker *kcfTracker = new KCFTracker();
+    trackers.push_back(opticalFlowTracker);
+    trackers.push_back(kcfTracker);
 }
 
 cv::Rect2d MyTracker::getNextPedestrianPosition() {
-    return trackers[0].getNextPedestrianPosition();
+    return trackers[1]->getNextPedestrianPosition();
 }
 
-void MyTracker::startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian) {
-    trackers[0].startTracking(capture, pedestrian);
+void MyTracker::startTracking(cv::VideoCapture videoCapture, cv::Rect2d pedestrian) {
+    for (auto tracker: trackers) {
+        tracker->startTracking(videoCapture, pedestrian);
+    }
 }

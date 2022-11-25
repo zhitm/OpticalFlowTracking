@@ -1,12 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
-project(OpticalFlowTracking)
+project(PedestrianTracking)
 
 set(CMAKE_CXX_STANDARD 14)
 
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-add_executable(OpticalFlowTracking main.cpp MyTracker.cpp MyTracker.h Tracker.cpp Tracker.h OpticalFlowTracker.cpp OpticalFlowTracker.h)
-add_executable(Tracker tracker.cpp OpticalFlowTracker.cpp OpticalFlowTracker.h)
+add_executable(${PROJECT_NAME} main.cpp MyTracker.cpp MyTracker.h trackers/Tracker.cpp trackers/Tracker.h trackers/OpticalFlowTracker.cpp trackers/OpticalFlowTracker.h trackers/KCFTracker.cpp trackers/KCFTracker.h)
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
-target_link_libraries(Tracker ${OpenCV_LIBS})

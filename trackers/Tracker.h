@@ -1,7 +1,3 @@
-//
-// Created by maria on 23.11.22.
-//
-
 #ifndef OPTICALFLOWTRACKING_TRACKER_H
 #define OPTICALFLOWTRACKING_TRACKER_H
 
@@ -9,9 +5,9 @@
 
 class Tracker {
 public:
+    virtual void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian)= 0;
+    virtual cv::Rect2d getNextPedestrianPosition()= 0;
     Tracker();
-    virtual void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian);
-    virtual cv::Rect2d getNextPedestrianPosition();
 
 };
 
