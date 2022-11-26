@@ -5,7 +5,7 @@
 
 class Tracker {
 public:
-    virtual void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian)= 0;
+    virtual void startTracking(std::string path, cv::Rect2d pedestrian)= 0;
     virtual cv::Rect2d getNextPedestrianPosition()= 0;
     Tracker();
 

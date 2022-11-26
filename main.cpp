@@ -9,6 +9,9 @@ using namespace cv;
 using namespace std;
 
 int main(int argc, char **argv) {
+
+
+
     if (argc != 2) {
         cerr << "Incorrect args" << endl;
         return 0;
@@ -25,15 +28,15 @@ int main(int argc, char **argv) {
     capture >> frame;
     box = selectROI("Frame", frame);
     MyTracker tracker = MyTracker();
-    cout << box << endl;
-    tracker.startTracking(capture, box);
+    tracker.startTracking(argv[1], box);
     while (!frame.empty()) {
         box = tracker.getNextPedestrianPosition();
-        cout << box << endl;
         capture >> frame;
         rectangle(frame, box, cv::Scalar(0, 255, 0));
         imshow("Frame", frame);
-
-        waitKey(30);
+        //exit
+        int keyboard = waitKey(30);
+        if (keyboard == 'q' || keyboard == 27)
+            break;
     }
 }

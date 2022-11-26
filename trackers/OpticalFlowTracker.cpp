@@ -38,8 +38,8 @@ void OpticalFlowTracker::updateBoxPosition() {
     pedestrianBox.y += boxMotion.y;
 }
 
-void OpticalFlowTracker::startTracking(VideoCapture cap, Rect2d pedestrian) {
-    this->capture = cap;
+void OpticalFlowTracker::startTracking(std::string path, Rect2d pedestrian) {
+    this->capture = VideoCapture(path);
     this->pedestrianBox = pedestrian;
     capture >> oldFrame;
     cvtColor(oldFrame, oldGray, COLOR_BGR2GRAY);

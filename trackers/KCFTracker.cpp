@@ -2,8 +2,8 @@
 #include "KCFTracker.h"
 
 KCFTracker::KCFTracker() = default;
-void KCFTracker::startTracking(cv::VideoCapture cap, cv::Rect2d pedestrian) {
-    capture = cap;
+void KCFTracker::startTracking(std::string path, cv::Rect2d pedestrian) {
+    capture = cv::VideoCapture(path);
     pedestrianBox = pedestrian;
     tracker = cv::TrackerKCF::create();
     cv::Mat frame;

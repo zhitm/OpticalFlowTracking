@@ -11,7 +11,7 @@ class KCFTracker: public Tracker {
     cv::Ptr<cv::TrackerKCF> tracker;
 public:
     KCFTracker();
-    void startTracking(cv::VideoCapture capture, cv::Rect2d pedestrian) override;
+    void startTracking(std::string path, cv::Rect2d pedestrian) override;
     cv::Rect2d getNextPedestrianPosition() override;
 };
 
