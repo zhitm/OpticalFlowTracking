@@ -1,6 +1,7 @@
 #include "MyTracker.h"
 #include "trackers/OpticalFlowTracker.h"
 #include "trackers/KCFTracker.h"
+#include "trackers/CSRTTracker.h"
 #include <vector>
 #include <numeric>
 #include <iostream>
@@ -8,9 +9,12 @@
 MyTracker::MyTracker() {
     Tracker *opticalFlowTracker = new OpticalFlowTracker();
     Tracker *kcfTracker = new KCFTracker();
+    Tracker *csrtTracker = new CSRTTracker();
     trackers.push_back(opticalFlowTracker);
     trackers.push_back(kcfTracker);
+    trackers.push_back(csrtTracker);
     weights.push_back(1);
+    weights.push_back(0);
     weights.push_back(1);
 }
 

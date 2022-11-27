@@ -5,6 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-add_executable(${PROJECT_NAME} main.cpp MyTracker.cpp MyTracker.h trackers/Tracker.cpp trackers/Tracker.h trackers/OpticalFlowTracker.cpp trackers/OpticalFlowTracker.h trackers/KCFTracker.cpp trackers/KCFTracker.h)
+add_executable(${PROJECT_NAME} main.cpp MyTracker.cpp MyTracker.h trackers/Tracker.cpp trackers/Tracker.h trackers/OpticalFlowTracker.cpp trackers/OpticalFlowTracker.h trackers/KCFTracker.cpp trackers/KCFTracker.h trackers/CSRTTracker.cpp trackers/CSRTTracker.h)
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
